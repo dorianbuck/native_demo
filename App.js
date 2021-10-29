@@ -1,6 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, FlatList, Button } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
 
 const someData = {
@@ -13,9 +15,9 @@ const someData = {
   ],
 };
 
-const App = () => {
+const App = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", paddingTop: 50 }}>
+    <View style={styles.container}>
       <Text>List of people</Text>
       <FlatList
         data={someData.data}
@@ -30,6 +32,10 @@ const App = () => {
           );
         }}
         keyExtractor={(item) => item.name}
+      />
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate("Details")}
       />
       <Text>Hello World!</Text>
       <StatusBar style="auto" />
