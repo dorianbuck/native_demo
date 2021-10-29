@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 // import { NavigationContainer } from "@react-navigation/native";
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, FlatList, Button } from "react-native";
+import { StyleSheet, Text, View, FlatList, Button, Image } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
 
 const someData = {
@@ -18,14 +18,20 @@ const someData = {
 const App = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>List of people</Text>
+      <Image
+        source={{ uri: "https://picsum.photos/200/300" }}
+        style={{ width: 200, height: 300 }}
+        />
+        <Text>List of people</Text>
       <FlatList
+        style={{ flexDirection: "row",
+        flexWrap: "wrap", }}
         data={someData.data}
         renderItem={({ item }) => {
           return (
             <Card>
               <Card.Content>
-                <Title>{item.name}</Title>
+                <Title onPress={() => navigation.navigate("Details")}>{item.name}</Title>
                 <Paragraph>{item.role}</Paragraph>
               </Card.Content>
             </Card>
@@ -46,9 +52,11 @@ export default App;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+    flexWrap: "wrap",
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "left",
   },
 });
